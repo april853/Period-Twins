@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Period Pro Tips with the Period Twins | femPAQ</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brand-purple: #b773b0;
+    --brand-teal: #1aa89d;
+    --brand-charcoal: #555655;
+    --brand-gray: #989998;
+    --brand-blush: #dac5d7;
+    --bg-dark: #1a1218;
+    --white: #ffffff;
+    --text-dim: rgba(255,255,255,0.65);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg-dark);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+  }
+
+  .app { width: 100%; max-width: 420px; min-height: 100vh; background: var(--bg-dark); }
+
+  .screen { display: none; width: 100%; min-height: 100vh; flex-direction: column; align-items: center; }
+  .screen.active { display: flex; }
+
+  /* ===== HUB ===== */
+  #hub {
+    background: linear-gradient(160deg, #1e0e1c 0%, #1a1218 45%, #0d1e1e 100%);
+    padding-bottom: 36px;
+  }
+
+  .hub-header { width: 100%; padding: 28px 24px 0; text-align: center; }
+
+  .fempaq-badge {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(183,115,176,0.15);
+    border: 1px solid rgba(183,115,176,0.35);
+    border-radius: 20px;
+    padding: 5px 14px;
+    color: var(--brand-blush);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .hub-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.3px;
+    margin-bottom: 4px;
+  }
+
+  .hub-title-main {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+
+  .hub-title-main span { color: var(--brand-blush); }
+
+  .hub-subtitle {
+    font-size: 13px;
+    color: var(--text-dim);
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .twins-stage {
+    width: 100%; height: 262px;
+    display: flex; justify-content: center; align-items: flex-end;
+    padding: 8px 0 0;
+  }
+  .twin-hub {
+    width: 134px; height: 254px;
+    object-fit: contain; object-position: bottom;
+    filter: drop-shadow(0 6px 20px rgba(183,115,176,0.35));
+    transition: transform 0.3s ease;
+  }
+  .twin-hub.ta { transform: translateX(12px); }
+  .twin-hub.tb { transform: translateX(-12px); }
+
+  .bubble-wrap { width: 100%; padding: 0 22px; display: flex; justify-content: center; margin: 8px 0 10px; }
+  .speech-bubble {
+    background: rgba(218,197,215,0.10);
+    border: 1px solid rgba(183,115,176,0.28);
+    border-radius: 18px; padding: 11px 18px;
+    max-width: 340px; text-align: center;
+    font-size: 13px; font-weight: 700;
+    color: var(--brand-blush); line-height: 1.5;
+  }
+
+  .product-grid { width: 100%; padding: 4px 20px 0; display: flex; flex-direction: column; gap: 11px; }
+  .product-btn {
+    width: 100%; border: none; border-radius: 18px;
+    padding: 14px 18px; display: flex; align-items: center; gap: 14px;
+    cursor: pointer; font-family: 'Nunito', sans-serif;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .product-btn:active { transform: scale(0.97); }
+  .product-btn.pad { background: linear-gradient(135deg, var(--brand-purple) 0%, #d4a0ce 100%); box-shadow: 0 4px 20px rgba(183,115,176,0.35); }
+  .product-btn.tampon { background: linear-gradient(135deg, var(--brand-teal) 0%, #45d4c8 100%); box-shadow: 0 4px 20px rgba(26,168,157,0.35); }
+  .product-btn.wipe { background: linear-gradient(135deg, var(--brand-charcoal) 0%, #7a7a79 100%); box-shadow: 0 4px 16px rgba(85,86,85,0.4); }
+  .btn-icon { width: 48px; height: 48px; background: rgba(255,255,255,0.2); border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+  .btn-text { text-align: left; flex: 1; }
+  .btn-label { font-size: 16px; font-weight: 900; color: white; display: block; }
+  .btn-sub { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.8); display: block; margin-top: 2px; }
+  .btn-arrow { font-size: 18px; color: rgba(255,255,255,0.75); font-weight: 900; }
+
+  /* ===== TUTORIAL SCREENS ===== */
+  .tutorial-screen { min-height: 100vh; flex-direction: column; }
+  .pad-world { background: linear-gradient(160deg, #1e0e1c 0%, #1a1218 50%, #1c0e1a 100%); }
+  .tampon-world { background: linear-gradient(160deg, #081e1d 0%, #1a1218 50%, #091e1d 100%); }
+  .wipe-world { background: linear-gradient(160deg, #161614 0%, #1a1218 50%, #131513 100%); }
+
+  .tut-header {
+    width: 100%; padding: 20px 20px 0;
+    display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+  }
+  .back-btn {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px; width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 17px; color: white; flex-shrink: 0;
+    transition: background 0.2s; font-family: 'Nunito', sans-serif;
+  }
+  .tut-title-wrap { flex: 1; }
+  .tut-eyebrow { font-size: 10px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-dim); }
+  .tut-title { font-size: 21px; font-weight: 900; color: white; }
+
+  .progress-wrap { width: 100%; padding: 12px 20px 0; flex-shrink: 0; }
+  .progress-dots { display: flex; gap: 5px; }
+  .dot { height: 5px; border-radius: 3px; background: rgba(255,255,255,0.15); transition: all 0.3s; flex: 1; }
+  .dot.active { background: white; }
+  .dot.done { background: rgba(255,255,255,0.4); }
+
+  .char-stage {
+    width: 100%; height: 180px;
+    display: flex; justify-content: center; align-items: flex-end;
+    padding: 6px 20px 0; flex-shrink: 0;
+  }
+  .char-img {
+    height: 172px; width: auto;
+    object-fit: contain; object-position: bottom;
+    filter: drop-shadow(0 4px 20px rgba(0,0,0,0.5));
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .char-img.fade-in { opacity: 1; transform: translateY(0); }
+  .char-img.fade-out { opacity: 0; transform: translateY(8px); }
+
+  .step-card {
+    width: calc(100% - 40px);
+    margin: 14px 20px 0;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 22px;
+    padding: 22px 20px 20px;
+    transition: opacity 0.25s ease;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .step-number { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; }
+  .pad-world .step-number { color: var(--brand-blush); }
+  .tampon-world .step-number { color: #45d4c8; }
+  .wipe-world .step-number { color: var(--brand-gray); }
+
+  .step-heading { font-size: 28px; font-weight: 900; color: white; margin-bottom: 14px; line-height: 1.1; }
+  .step-script { font-size: 18px; font-weight: 600; color: rgba(255,255,255,0.88); line-height: 1.65; }
+
+  .tut-nav { width: 100%; padding: 14px 20px 24px; display: flex; gap: 10px; flex-shrink: 0; }
+  .nav-btn {
+    border: none; border-radius: 15px; padding: 16px;
+    font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 800;
+    cursor: pointer; transition: transform 0.15s; flex: 1;
+  }
+  .nav-btn:active { transform: scale(0.96); }
+  .nav-prev {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: white; flex: 0 0 52px; font-size: 18px;
+  }
+  .nav-prev:disabled { opacity: 0.25; cursor: not-allowed; }
+  .pad-world .nav-next { background: linear-gradient(135deg, var(--brand-purple), #d4a0ce); color: #1a1218; }
+  .tampon-world .nav-next { background: linear-gradient(135deg, var(--brand-teal), #45d4c8); color: #081e1d; }
+  .wipe-world .nav-next { background: linear-gradient(135deg, var(--brand-charcoal), #7a7a79); color: white; }
+
+  /* ===== DONE ===== */
+  #done {
+    background: linear-gradient(160deg, #1e0e1c 0%, #1a1218 55%, #0d1e1e 100%);
+    justify-content: center; text-align: center; padding: 36px 28px;
+  }
+  .done-twins { display: flex; justify-content: center; margin-bottom: 20px; }
+  .done-twin { width: 136px; object-fit: contain; filter: drop-shadow(0 6px 20px rgba(183,115,176,0.4)); }
+  .done-twin.ta { transform: translateX(12px); }
+  .done-twin.tb { transform: translateX(-12px); }
+  .done-badge {
+    background: rgba(183,115,176,0.2); border: 1px solid rgba(183,115,176,0.4);
+    color: var(--brand-blush); font-size: 12px; font-weight: 900;
+    border-radius: 20px; padding: 6px 16px; display: inline-block; margin-bottom: 14px;
+  }
+  .done-headline { font-size: 30px; font-weight: 900; color: white; line-height: 1.1; margin-bottom: 8px; }
+  .done-headline span { color: var(--brand-blush); }
+  .done-body { font-size: 15px; color: var(--text-dim); font-weight: 600; line-height: 1.6; margin-bottom: 28px; max-width: 290px; margin-left: auto; margin-right: auto; }
+  .done-cta {
+    width: 100%; max-width: 320px;
+    background: linear-gradient(135deg, var(--brand-purple), var(--brand-teal));
+    color: white; border: none; border-radius: 17px;
+    padding: 16px; font-family: 'Nunito', sans-serif;
+    font-size: 15px; font-weight: 900; cursor: pointer;
+    margin-bottom: 11px; display: block; text-decoration: none;
+    transition: transform 0.2s;
+  }
+  .done-back {
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+    color: var(--text-dim); border-radius: 17px; padding: 13px;
+    font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 700;
+    cursor: pointer; width: 100%; max-width: 320px;
+  }
+
+  @media (max-width: 380px) {
+    .hub-title-main { font-size: 24px; }
+    .step-heading { font-size: 24px; }
+    .step-script { font-size: 16px; }
+    .char-stage { height: 155px; }
+    .char-img { height: 148px; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HUB -->
+  <div class="screen active" id="hub">
+    <div class="hub-header">
+      <div class="fempaq-badge">✦ femPAQ</div>
+      <div class="hub-title">Period Pro Tips with the</div>
+      <h1 class="hub-title-main"><span>Period Twins</span></h1>
+      <p class="hub-subtitle">Tap a product below to learn how to use it</p>
+    </div>
+    <div class="twins-stage">
+      <img src="twinA_full.png" class="twin-hub ta" alt="Twin A">
+      <img src="twinB_full.png" class="twin-hub tb" alt="Twin B">
+    </div>
+    <div class="bubble-wrap">
+      <div class="speech-bubble">
+        "No secrets, no weirdness — just the facts on how to use your gear. Let's do this! 💜"
+      </div>
+    </div>
+    <div class="product-grid">
+      <button class="product-btn pad" onclick="startTutorial('pad')">
+        <div class="btn-icon">🩱</div>
+        <div class="btn-text">
+          <span class="btn-label">How to Use a Pad</span>
+          <span class="btn-sub">5 steps · 60 seconds</span>
+        </div>
+        <span class="btn-arrow">→</span>
+      </button>
+      <button class="product-btn tampon" onclick="startTutorial('tampon')">
+        <div class="btn-icon">🌊</div>
+        <div class="btn-text">
+          <span class="btn-label">How to Use a Tampon</span>
+          <span class="btn-sub">5 steps · 60 seconds</span>
+        </div>
+        <span class="btn-arrow">→</span>
+      </button>
+      <button class="product-btn wipe" onclick="startTutorial('wipe')">
+        <div class="btn-icon">✨</div>
+        <div class="btn-text">
+          <span class="btn-label">How to Use a Wipe</span>
+          <span class="btn-sub">4 steps · 45 seconds</span>
+        </div>
+        <span class="btn-arrow">→</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- PAD TUTORIAL -->
+  <div class="screen tutorial-screen pad-world" id="tut-pad">
+    <div class="tut-header">
+      <button class="back-btn" onclick="goHub()">←</button>
+      <div class="tut-title-wrap">
+        <div class="tut-eyebrow">How to use</div>
+        <div class="tut-title">A Pad 🩱</div>
+      </div>
+    </div>
+    <div class="progress-wrap"><div class="progress-dots" id="pad-dots"></div></div>
+    <div class="char-stage">
+      <img src="twinB_pad.png" class="char-img fade-in" id="pad-char" alt="Twin B with pad">
+    </div>
+    <div class="step-card">
+      <div class="step-number" id="pad-step-num">Step 1 of 5</div>
+      <div class="step-heading" id="pad-step-head">Clean Hands</div>
+      <div class="step-script" id="pad-step-script">Always start with clean hands. A quick wash keeps everything fresh before you get started.</div>
+    </div>
+    <div class="tut-nav">
+      <button class="nav-btn nav-prev" id="pad-prev" onclick="padStep(-1)" disabled>←</button>
+      <button class="nav-btn nav-next" id="pad-next" onclick="padStep(1)">Next step →</button>
+    </div>
+  </div>
+
+  <!-- TAMPON TUTORIAL -->
+  <div class="screen tutorial-screen tampon-world" id="tut-tampon">
+    <div class="tut-header">
+      <button class="back-btn" onclick="goHub()">←</button>
+      <div class="tut-title-wrap">
+        <div class="tut-eyebrow">How to use</div>
+        <div class="tut-title">A Tampon 🌊</div>
+      </div>
+    </div>
+    <div class="progress-wrap"><div class="progress-dots" id="tampon-dots"></div></div>
+    <div class="char-stage">
+      <img src="twinA_tampon.png" class="char-img fade-in" id="tampon-char" alt="Twin A with tampon">
+    </div>
+    <div class="step-card">
+      <div class="step-number" id="tampon-step-num">Step 1 of 5</div>
+      <div class="step-heading" id="tampon-step-head">Wash & Relax</div>
+      <div class="step-script" id="tampon-step-script">Wash your hands first. Then take a deep breath and relax your muscles — if you're tense, it's harder to insert.</div>
+    </div>
+    <div class="tut-nav">
+      <button class="nav-btn nav-prev" id="tampon-prev" onclick="tamponStep(-1)" disabled>←</button>
+      <button class="nav-btn nav-next" id="tampon-next" onclick="tamponStep(1)">Next step →</button>
+    </div>
+  </div>
+
+  <!-- WIPE TUTORIAL -->
+  <div class="screen tutorial-screen wipe-world" id="tut-wipe">
+    <div class="tut-header">
+      <button class="back-btn" onclick="goHub()">←</button>
+      <div class="tut-title-wrap">
+        <div class="tut-eyebrow">How to use</div>
+        <div class="tut-title">A Wipe ✨</div>
+      </div>
+    </div>
+    <div class="progress-wrap"><div class="progress-dots" id="wipe-dots"></div></div>
+    <div class="char-stage">
+      <img src="twinA_full.png" class="char-img fade-in" id="wipe-char" alt="Twin A">
+    </div>
+    <div class="step-card">
+      <div class="step-number" id="wipe-step-num">Step 1 of 4</div>
+      <div class="step-heading" id="wipe-step-head">Open the Packet</div>
+      <div class="step-script" id="wipe-step-script">Tear open the packet and unfold the wipe. It's ready to use right away — no prep needed.</div>
+    </div>
+    <div class="tut-nav">
+      <button class="nav-btn nav-prev" id="wipe-prev" onclick="wipeStep(-1)" disabled>←</button>
+      <button class="nav-btn nav-next" id="wipe-next" onclick="wipeStep(1)">Next step →</button>
+    </div>
+  </div>
+
+  <!-- DONE -->
+  <div class="screen" id="done">
+    <div class="done-twins">
+      <img src="twinA_full.png" class="done-twin ta" alt="Twin A">
+      <img src="twinB_full.png" class="done-twin tb" alt="Twin B">
+    </div>
+    <div class="done-badge">You got this! 💜</div>
+    <h2 class="done-headline">Your period is<br><span>totally normal.</span></h2>
+    <p class="done-body">Now you have the tools and the knowledge to handle it like a pro. We got you.</p>
+    <a href="https://fempaq.com" class="done-cta">Shop femPAQ Products → fempaq.com</a>
+    <button class="done-back" onclick="goHub()">← Back to tutorials</button>
+  </div>
+
+</div>
+<script>
+  const padSteps = [
+    {head:"Clean Hands",script:"Always start with clean hands. A quick wash keeps everything fresh before you get started.",char:"twinB_pad.png"},
+    {head:"Unwrap the Pad",script:"Unwrap the pad. Keep the wrapper — you can use it to throw away your old one later!",char:"twinB_pad.png"},
+    {head:"Peel & Stick",script:"Peel off the long paper backing and press the sticky side right into the center of your underwear.",char:"twinB_pad.png"},
+    {head:"Fold the Wings",script:"If your pad has wings, peel off that paper too and fold them under the edges. This keeps it from shifting around.",char:"twinB_pad.png"},
+    {head:"Change It Up",script:"Change your pad every 4 to 6 hours, or whenever it feels full. Roll it up, wrap it, toss it in the trash. You're good to go!",char:"twinB_pad.png"},
+  ];
+  const tamponSteps = [
+    {head:"Wash & Relax",script:"Wash your hands first. Then take a deep breath and relax your muscles — if you're tense, it's harder to insert.",char:"twinA_tampon.png"},
+    {head:"The Grip",script:"Unwrap it. Hold the applicator by the grippy middle part using your thumb and middle finger.",char:"twinA_tampon.png"},
+    {head:"The Angle",script:"Find your vaginal opening. Slide the tip in, aiming slightly toward your lower back, not straight up. Stop when your fingers touch your body.",char:"twinA_tampon.png"},
+    {head:"Push It In",script:"Use your pointer finger to push the smaller tube all the way in. This places the tampon inside where it needs to be.",char:"twinA_tampon.png"},
+    {head:"Remove & Go",script:"Pull the plastic applicator out and toss it away. The string hangs outside so you can pull the tampon out later. Change every 4 to 8 hours!",char:"twinA_tampon.png"},
+  ];
+  const wipeSteps = [
+    {head:"Open the Packet",script:"Tear open the packet and unfold the wipe. It's ready to use right away — no prep needed.",char:"twinA_full.png"},
+    {head:"Front to Back",script:"Always wipe from front to back. This keeps bacteria away from where it shouldn't be. This direction matters every time.",char:"twinB_full.png"},
+    {head:"Trash — Not Toilet",script:"Toss it in the trash! Never flush wipes down the toilet — your plumbing will seriously hate you. 🚫🚽",char:"twinA_full.png"},
+    {head:"Fresh & Done",script:"Enjoy that clean, fresh feeling and get back to your day. That's it — quick, easy, done. ✨",char:"twinB_full.png"},
+  ];
+
+  let padIdx=0,tamponIdx=0,wipeIdx=0;
+
+  function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
+  function goHub(){padIdx=0;tamponIdx=0;wipeIdx=0;showScreen('hub');}
+  function startTutorial(type){
+    if(type==='pad'){padIdx=0;buildDots('pad',padSteps.length);renderStep('pad',0);showScreen('tut-pad');}
+    else if(type==='tampon'){tamponIdx=0;buildDots('tampon',tamponSteps.length);renderStep('tampon',0);showScreen('tut-tampon');}
+    else{wipeIdx=0;buildDots('wipe',wipeSteps.length);renderStep('wipe',0);showScreen('tut-wipe');}
+  }
+  function buildDots(type,count){
+    const c=document.getElementById(type+'-dots');c.innerHTML='';
+    for(let i=0;i<count;i++){const d=document.createElement('div');d.className='dot'+(i===0?' active':'');d.id=type+'-dot-'+i;c.appendChild(d);}
+  }
+  function updateDots(type,idx,total){
+    for(let i=0;i<total;i++){const d=document.getElementById(type+'-dot-'+i);d.className='dot'+(i<idx?' done':i===idx?' active':'');}
+  }
+  function renderStep(type,idx){
+    const steps=type==='pad'?padSteps:type==='tampon'?tamponSteps:wipeSteps;
+    const total=steps.length;const step=steps[idx];
+    const card=document.querySelector('#tut-'+type+' .step-card');
+    card.style.opacity='0';
+    setTimeout(()=>{
+      document.getElementById(type+'-step-num').textContent='Step '+(idx+1)+' of '+total;
+      document.getElementById(type+'-step-head').textContent=step.head;
+      document.getElementById(type+'-step-script').textContent=step.script;
+      card.style.opacity='1';
+    },150);
+    const el=document.getElementById(type+'-char');
+    el.classList.remove('fade-in');el.classList.add('fade-out');
+    setTimeout(()=>{el.src=step.char;el.classList.remove('fade-out');el.classList.add('fade-in');},180);
+    updateDots(type,idx,total);
+    document.getElementById(type+'-prev').disabled=idx===0;
+    document.getElementById(type+'-next').textContent=idx===total-1?'I got it! ✓':'Next step →';
+  }
+  function padStep(d){if(d===1&&padIdx===padSteps.length-1){showScreen('done');return;}padIdx=Math.max(0,Math.min(padSteps.length-1,padIdx+d));renderStep('pad',padIdx);}
+  function tamponStep(d){if(d===1&&tamponIdx===tamponSteps.length-1){showScreen('done');return;}tamponIdx=Math.max(0,Math.min(tamponSteps.length-1,tamponIdx+d));renderStep('tampon',tamponIdx);}
+  function wipeStep(d){if(d===1&&wipeIdx===wipeSteps.length-1){showScreen('done');return;}wipeIdx=Math.max(0,Math.min(wipeSteps.length-1,wipeIdx+d));renderStep('wipe',wipeIdx);}
+
+  buildDots('pad',padSteps.length);buildDots('tampon',tamponSteps.length);buildDots('wipe',wipeSteps.length);
+</script>
+</body>
+</html>
